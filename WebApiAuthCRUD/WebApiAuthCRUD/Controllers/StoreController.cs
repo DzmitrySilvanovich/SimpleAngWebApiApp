@@ -8,29 +8,52 @@ namespace WebApiAuthCRUD.Controllers
     [ApiController]
     public class StoreController : ControllerBase
     {
+        private readonly ILogger<StoreController> _logger;
+
+        public StoreController(ILogger<StoreController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET: api/<StoreController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Book> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new Book[] {
+                new Book
+                {
+                    Id = 1,
+                    Title = "Test",
+                    Author = "Author",
+                    Price = 10.99m,
+                    Quantity = 1,
+                }
+            };
         }
 
         // GET api/<StoreController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Book Get(int id)
         {
-            return "value";
+          return new Book
+            {
+                Id = 1,
+                Title = "Test",
+                Author = "Author",
+                Price = 10.99m,
+                Quantity = 1,
+            };
         }
 
         // POST api/<StoreController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Book value)
         {
         }
 
         // PUT api/<StoreController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Book value)
         {
         }
 
@@ -39,5 +62,17 @@ namespace WebApiAuthCRUD.Controllers
         public void Delete(int id)
         {
         }
+    }
+
+    public class Book
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Author { get; set; }
+        public string Publisher { get; set; } = "Test";
+        public string ISBN { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
     }
 }
