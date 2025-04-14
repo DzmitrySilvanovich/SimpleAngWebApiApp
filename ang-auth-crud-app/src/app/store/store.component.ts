@@ -58,15 +58,13 @@ constructor(private service: StoreService) {
 
   saveBook() {
     if (this.isNewRecord) {
-      // добавляем пользователя
       this.service.createBook(this.editedBook as Book).subscribe(_ => {
           this.statusMessage = "Data is added",
           this.loadBooks();
       });
       this.isNewRecord = false;
       this.editedBook = null;
-  } else {
-      // изменяем пользователя
+  } else {     
       this.service.updateBook(this.editedBook as Book).subscribe(_ => {
           this.statusMessage = "Data is updated",
           this.loadBooks();

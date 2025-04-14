@@ -2,7 +2,6 @@
 <h1>bool list</h1>
 <button (click)="addBook()">Add</button>
 <table>
-     
     <tr>
         <th>Id</th>
         <th>Title</th>
@@ -12,19 +11,13 @@
     @for(book of books; track $index){
         <p>1</p>
         <tr>
-            <!--   <ng-container [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
-            </ng-container> -->
-          <ng-template [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
-            </ng-template> 
-          <!--  <ng-container *ngTemplateOutlet="#readOnlyTemplate;  context:{ $implicit: book}">
-            </ng-container>-->
+            <ng-container [ngTemplateOutlet]="loadTemplate(book)" [ngTemplateOutletContext]="{ $implicit: book}">
+            </ng-container>           
         </tr>
     }
 </table>
-<div>{{statusMessage}}</div>
-     
-     
-<!--шаблон для чтения-->
+<div>{{statusMessage}}</div>         
+<!---->
 <ng-template #readOnlyTemplate let-book>
     <td>read</td>
     <td>{{book.id}}</td>
@@ -34,9 +27,8 @@
         <button (click)="editBook(book)">Изменить</button> 
         <button (click)="deleteBook(book)">Удалить</button>
     </td>
-</ng-template>
-    
-<!--шаблон для редактирования-->
+</ng-template>    
+<!---->
 <ng-template #editTemplate>
     <td>edit</td>
     <td>
