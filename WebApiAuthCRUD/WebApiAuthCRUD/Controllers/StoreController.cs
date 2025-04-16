@@ -1,78 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using WebApiAuthCRUD.BAL.Contracts;
+using WebApiAuthCRUD.BAL.Models;
+using WebApiAuthCRUD.DAL.Domains;
 
 namespace WebApiAuthCRUD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StoreController : ControllerBase
+    public class StoreController(ILogger<StoreController> logger, IBookService bookService) : ControllerBase
     {
-        private readonly ILogger<StoreController> _logger;
+        private readonly ILogger<StoreController> _logger = logger;
+        private readonly IBookService _bookService = bookService;
 
-        public StoreController(ILogger<StoreController> logger)
-        {
-            _logger = logger;
-        }
-
-        // GET: api/<StoreController>
         [HttpGet]
-        public IEnumerable<Book> Get()
+        public async Task<IEnumerable<BookReturnModel>> Get()
         {
-            return new Book[] {
-                new Book
-                {
-                    Id = 1,
-                    Title = "Test",
-                    Author = "Author",
-                    Price = 10.99m,
-                    Quantity = 1,
-                }
-            };
+              var books = await _bookService.GetBooksAsync();
+             return books;
         }
 
-        // GET api/<StoreController>/5
         [HttpGet("{id}")]
-        public Book Get(int id)
+        public async Task<BookReturnModel> Get(int id)
         {
-          return new Book
-            {
-                Id = 1,
-                Title = "Test",
-                Author = "Author",
-                Price = 10.99m,
-                Quantity = 1,
-            };
+          return  await _bookService.GetBookByIdAsync(id);
         }
 
-        // POST api/<StoreController>
         [HttpPost]
-        public void Post([FromBody] Book value)
+        public async Task Post([FromBody] BookViewModel bookViewModel)
         {
+            await _bookService.AddBookAync(bookViewModel.Adapt<Book>());
         }
 
-        // PUT api/<StoreController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Book value)
+        public async Task Put(int id, [FromBody] BookViewModel bookViewModel)
         {
+            await _bookService.UpdateBookAync(bookViewModel.Adapt<Book>());
         }
 
-        // DELETE api/<StoreController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await _bookService.DeleteBookAync(id);
         }
-    }
-
-    public class Book
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Author { get; set; }
-        public string Publisher { get; set; } = "Test";
-        public string ISBN { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
     }
 }

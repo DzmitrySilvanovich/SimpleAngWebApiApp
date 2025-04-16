@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAuthCRUD", "WebApiAuthCRUD\WebApiAuthCRUD.csproj", "{5518B5A6-3B2F-45B8-9345-6032F37AED24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAuthCRUD.DAL", "WebApiAuthCRUD.DAL\WebApiAuthCRUD.DAL.csproj", "{586CEEF0-5B8F-427B-9307-3FF675E1BA95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAuthCRUD.BAL", "WebApiAuthCRUD.BAL\WebApiAuthCRUD.BAL.csproj", "{36E4BB43-C64D-401D-BE6B-C5F314373B53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5518B5A6-3B2F-45B8-9345-6032F37AED24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5518B5A6-3B2F-45B8-9345-6032F37AED24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5518B5A6-3B2F-45B8-9345-6032F37AED24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586CEEF0-5B8F-427B-9307-3FF675E1BA95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586CEEF0-5B8F-427B-9307-3FF675E1BA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586CEEF0-5B8F-427B-9307-3FF675E1BA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586CEEF0-5B8F-427B-9307-3FF675E1BA95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E4BB43-C64D-401D-BE6B-C5F314373B53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E4BB43-C64D-401D-BE6B-C5F314373B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E4BB43-C64D-401D-BE6B-C5F314373B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E4BB43-C64D-401D-BE6B-C5F314373B53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

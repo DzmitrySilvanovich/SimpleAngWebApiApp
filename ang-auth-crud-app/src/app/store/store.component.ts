@@ -1,20 +1,19 @@
 import {Component, OnInit, TemplateRef, ViewChild} from "@angular/core";
 import {NgTemplateOutlet} from "@angular/common";
 import { FormsModule }   from "@angular/forms";
-import { HttpClientModule }   from "@angular/common/http";
 import {Book} from "../core/models/book.model";
 import {StoreService} from "../core/services/store.service";
 
 @Component({
   selector: 'app-store',
-  imports: [NgTemplateOutlet],
+  standalone: true,
+  imports: [NgTemplateOutlet, FormsModule],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css',
-  providers: [StoreService]
+  providers: [StoreService],
 })
 export class StoreComponent implements OnInit  {
 
-//типы шаблонов
 @ViewChild("readOnlyTemplate", {static: false}) readOnlyTemplate: TemplateRef<any>|undefined;
 @ViewChild("editTemplate", {static: false}) editTemplate: TemplateRef<any>|undefined;
      
@@ -39,7 +38,7 @@ constructor(private service: StoreService) {
   }
 
   addBook() {
-    this.editedBook = { id: 0, title: '', author: "", isbn: '', price:  0, quantity: 0 };//;new Book("","","");
+    this.editedBook = { id: 0, title: '', author: ""};
     this.books.push(this.editedBook);
     this.isNewRecord = true;
   }
@@ -81,7 +80,7 @@ constructor(private service: StoreService) {
   this.editedBook = null;
   }
 
-  deleteUser(book: Book) {
+  deleteBook(book: Book) {
     this.service.deleteBook(book.id).subscribe(_ => {
       this.statusMessage = "Data is deleted",
       this.loadBooks();
