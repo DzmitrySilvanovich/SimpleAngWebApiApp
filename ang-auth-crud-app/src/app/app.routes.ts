@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import {StoreComponent} from "./store/store.component";
+import {HomeComponent} from "./home/home.component";
 
 
 export const routes: Routes = [
+    { path: "", component: HomeComponent},
+    { path: "home", component: HomeComponent},
     { path: "store", component: StoreComponent},
-
-    //{ path: 'account', loadChildren: './account/account.module#AccountModule' },
-    //{ path: 'store', loadChildren: './store/store.module#StoreModule' },
-    //{ path: 'order', loadChildren: './order/order.module#OrderModule' }
 ];
