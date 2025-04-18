@@ -3,6 +3,7 @@ import {NgTemplateOutlet} from "@angular/common";
 import { FormsModule }   from "@angular/forms";
 import {Book} from "../core/models/book.model";
 import {StoreService} from "../core/services/store.service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-store',
@@ -21,8 +22,9 @@ editedBook: Book|null = null;
 books: Array<Book>;
 isNewRecord: boolean = false;
 statusMessage: string = "";
+apiResponse: string;
      
-constructor(private service: StoreService) {
+constructor(private service: StoreService, private http: HttpClient) {
   this.books = new Array<Book>();
 }
 
@@ -85,6 +87,6 @@ constructor(private service: StoreService) {
       this.statusMessage = "Data is deleted",
       this.loadBooks();
   });
-  }
 
+  }
 }
