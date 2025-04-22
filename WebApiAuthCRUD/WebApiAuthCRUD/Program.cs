@@ -21,7 +21,9 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBookService, BookService>();
 
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(
-    builder.Configuration, "AzureAd");
+    builder.Configuration, "AzureAd")
+.EnableTokenAcquisitionToCallDownstreamApi()
+.AddInMemoryTokenCaches();
 
 //builder.Services.AddMicrosoftIdentityWebApiAuthentication(
 //   builder.Configuration, "AzureAd");

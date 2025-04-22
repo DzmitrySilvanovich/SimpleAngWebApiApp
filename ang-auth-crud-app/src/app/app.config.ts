@@ -33,7 +33,7 @@ import {
   MsalGuard,
   MsalBroadcastService,
 } from '@azure/msal-angular';
-//import { environment } from '../environments/environment';
+import { environment } from '../environments/environment';
 //import { MatButtonModule } from '@angular/material/button';
 //import { MatMenuModule } from '@angular/material/menu';
 //import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,11 +50,11 @@ export function loggerCallback(logLevel: LogLevel, message: string) {
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
-      //clientId: environment.msalConfig.auth.clientId,
-      //authority: environment.msalConfig.auth.authority,
-      clientId: "edf4c1cb-b781-4915-948f-5bdf84db18c2",
+      clientId: environment.msalConfig.auth.clientId,
+      authority: environment.msalConfig.auth.authority,
+     // clientId: "edf4c1cb-b781-4915-948f-5bdf84db18c2",
       // Full directory URL, in the form of https://login.microsoftonline.com/<tenant>
-      authority: "https://login.microsoftonline.com/b41b72d0-4e9f-4c26-8a69-f949f367c91d",
+     // authority: "https://login.microsoftonline.com/b41b72d0-4e9f-4c26-8a69-f949f367c91d",
       redirectUri: '/',
       postLogoutRedirectUri: '/',
     },
@@ -74,12 +74,17 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read', 'email', 'profile']);
+  console.log(environment.apiConfig.uri);
+  console.log(environment.apiConfig.scopes);
+  protectedResourceMap.set(environment.apiConfig.uri, environment.apiConfig.scopes);
+ /* protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read', 'email', 'profile']);
   protectedResourceMap.set('https://localhost:7046/WeatherForecast', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   protectedResourceMap.set('https://localhost:7054/WeatherForecast', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   protectedResourceMap.set('https://localhost:7054/api', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   protectedResourceMap.set('https://localhost:7054/api/store', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
+  */
 
+//protectedResourceMap.set('https://localhost:7054/api', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   return {
     interactionType: InteractionType.Redirect,
     protectedResourceMap,
@@ -90,8 +95,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   return {
     interactionType: InteractionType.Redirect,
     authRequest: {
-     // scopes: [...environment.apiConfig.scopes],
-      scopes: ['user.read'],
+      scopes: [...environment.apiConfig.scopes],
+     // scopes: ['user.read'],
     },
     loginFailedRoute: '/login-failed',
   };

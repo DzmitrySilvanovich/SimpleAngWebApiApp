@@ -1,10 +1,8 @@
 <div *ngIf="isLoggedIn()">
-    <h6> You are logged in</h6>
     <button mat-menu-item (click)="logout()">Logout using Redirect</button>
       <button mat-menu-item (click)="logout(true)">Logout using Popup</button>
   </div>
   <div *ngIf="!isLoggedIn()">
-    <h6> You are NOT logged in</h6>
     <button mat-menu-item (click)="loginRedirect()">Login using Redirect</button>
       <button mat-menu-item (click)="loginPopup()">Login using Popup</button>   
   </div>
