@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using WebApiAuthCRUD.BAL.Models;
+﻿using WebApiAuthCRUD.BAL.Models;
 using WebApiAuthCRUD.DAL.Domains;
 
 namespace WebApiAuthCRUD.BAL.Contracts
