@@ -1,5 +1,3 @@
-//import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-//
 import {
   ApplicationConfig,
   importProvidersFrom,
@@ -34,15 +32,7 @@ import {
   MsalBroadcastService,
 } from '@azure/msal-angular';
 import { environment } from '../environments/environment';
-//import { MatButtonModule } from '@angular/material/button';
-//import { MatMenuModule } from '@angular/material/menu';
-//import { MatToolbarModule } from '@angular/material/toolbar';
-//import { MatListModule } from '@angular/material/list';
-//
 
-//import { provideRouter } from '@angular/router';
-
-//import { routes } from './app.routes';
 export function loggerCallback(logLevel: LogLevel, message: string) {
   console.log(message);
 }
@@ -78,13 +68,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   console.log(environment.apiConfig.scopes);
   protectedResourceMap.set(environment.apiConfig.uri, environment.apiConfig.scopes);
  /* protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read', 'email', 'profile']);
-  protectedResourceMap.set('https://localhost:7046/WeatherForecast', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
-  protectedResourceMap.set('https://localhost:7054/WeatherForecast', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   protectedResourceMap.set('https://localhost:7054/api', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
-  protectedResourceMap.set('https://localhost:7054/api/store', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   */
-
-//protectedResourceMap.set('https://localhost:7054/api', ['api://74ba30ce-6fac-4822-9f2e-265c36261b74/wearther']);
   return {
     interactionType: InteractionType.Redirect,
     protectedResourceMap,
@@ -104,15 +89,11 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-         provideRouter(routes),
-          importProvidersFrom(
-      BrowserModule,
-  //    MatButtonModule,
-   //   MatToolbarModule,
-    //  MatListModule,
-    //  MatMenuModule
+        provideRouter(routes),
+        importProvidersFrom(
+        BrowserModule,
     ),
- //   provideNoopAnimations(), ????
+    //provideNoopAnimations(), 
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     {
       provide: HTTP_INTERCEPTORS,

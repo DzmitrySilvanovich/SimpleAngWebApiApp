@@ -3,13 +3,11 @@ using WebApiAuthCRUD.BAL.Contracts;
 using WebApiAuthCRUD.BAL.Services;
 using WebApiAuthCRUD.DAL.Contracts;
 using WebApiAuthCRUD.DAL.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.OpenApi.Models;
-
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -20,20 +18,10 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddScoped<IBookService, BookService>();
 
-builder.Services.AddMicrosoftIdentityWebApiAuthentication(
-    builder.Configuration, "AzureAd")
-.EnableTokenAcquisitionToCallDownstreamApi()
-.AddInMemoryTokenCaches();
 
-//builder.Services.AddMicrosoftIdentityWebApiAuthentication(
-//   builder.Configuration, "AzureAd");
-
-//services.AddMicrosoftIdentityWebApiAuthentication(Configuration)
-//                    .EnableTokenAcquisitionToCallDownstreamApi()
-//                        .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
-//                        .AddInMemoryTokenCaches();
-
-
+builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd")
+    .EnableTokenAcquisitionToCallDownstreamApi()
+    .AddDistributedTokenCaches();
 
 builder.Services.AddControllers();
 
@@ -53,8 +41,9 @@ app.UseCors(x => x
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
-//app.UseAuthentication();
 
 app.MapControllers();
 

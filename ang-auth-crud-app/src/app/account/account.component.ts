@@ -1,7 +1,5 @@
-//import { Component } from '@angular/core';
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import {
   MsalService,
   MsalModule,
@@ -25,8 +23,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-account',
   imports: [ CommonModule,
     MsalModule,
-  /*  RouterOutlet,
-    RouterLink */], 
+ ], 
   templateUrl: './account.component.html',
   styleUrl: './account.component.css'
 })
@@ -35,7 +32,6 @@ export class AccountComponent  implements OnInit, OnDestroy {
   isIframe = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
-  //http: any;
   apiResponse: string;
 
   constructor(
