@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using WebApiAuthCRUD.DAL.Domains;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace WebApiAuthCRUD.DAL.Repositories
 {
